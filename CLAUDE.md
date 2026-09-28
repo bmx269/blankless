@@ -34,9 +34,9 @@ Release tooling mirrors `enable-navigation-icons` (already published on WP.org u
 - Prefer root-cause fixes over surface workarounds.
 
 ## Key Architecture
-- Single option `blankless` stores `[ post_type => pattern_slug ]` map.
+- Single option `blankless` stores `[ post_type => [ 'slug' => string, 'pattern_id' => int ] ]`. `sanitize_settings()` links the slug to a published `wp_block` ID at save time; 0 means code patterns only.
 - `default_content` filter resolves the saved slug to block markup at new-post time, only when the incoming content is empty.
-- Resolution order: (1) published `wp_block` post by `post_name`, (2) full registered pattern name, (3) registered pattern slug suffix.
+- Resolution order: (1) the linked `wp_block` by ID, read live so edits and renames apply, (2) full registered pattern name, (3) registered pattern slug suffix. Never look up `wp_block` by slug at post-creation time: any Author can publish one, which would let them replace an administrator's default.
 - Settings page lists every public post type (minus `attachment` and `wp_block`) with a live status badge per row.
 
 ## Versioning & Releases

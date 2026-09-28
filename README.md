@@ -60,7 +60,7 @@ Because the new post isn't empty, core's "Choose a pattern" starter-pattern moda
 
 Main plugin file: [`blankless.php`](blankless.php)
 
-Option key: `blankless` (associative array, post_type => pattern slug)
+Option key: `blankless` (associative array, `post_type => [ 'slug' => string, 'pattern_id' => int ]`; `pattern_id` is the Saved Pattern linked at save time, or 0)
 
 Try it locally with WordPress Playground:
 

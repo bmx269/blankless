@@ -101,11 +101,11 @@ function add_help_tabs(): void {
 			'title'   => __( 'How matching works', 'blankless' ),
 			'content' => '<p>' . esc_html__( 'When a new post is created, the slug is looked up in this order and the first match is used:', 'blankless' ) . '</p>'
 				. '<ol>'
-				. '<li>' . esc_html__( 'A published pattern saved in the Site Editor with that slug.', 'blankless' ) . '</li>'
+				. '<li>' . esc_html__( 'The pattern saved in the Site Editor that had that slug when these settings were last saved. Edits to it apply straight away.', 'blankless' ) . '</li>'
 				. '<li>' . esc_html__( 'A pattern registered in code with that full name, such as mytheme/staff-profile.', 'blankless' ) . '</li>'
 				. '<li>' . esc_html__( 'A pattern registered in code whose name ends with the slug, such as staff-profile.', 'blankless' ) . '</li>'
 				. '</ol>'
-				. '<p>' . esc_html__( 'The Status column shows which one matched. "Saved in Site Editor" patterns have an Edit link. "In Code" patterns come from your theme or a plugin and are changed in their files.', 'blankless' ) . '</p>',
+				. '<p>' . esc_html__( 'The Status column shows which one matched. "Saved in Site Editor" patterns have an Edit link. "In Code" patterns come from your theme or a plugin and are changed in their files. If you publish a Saved Pattern after saving this screen, save it again to use that pattern.', 'blankless' ) . '</p>',
 		)
 	);
 
@@ -133,10 +133,14 @@ function register_settings(): void {
 }
 
 /**
- * Sanitize the settings array: keys to post-type slugs, values to plain text.
+ * Sanitize the settings array and pin each slug to the Saved Pattern it names right now.
+ *
+ * Recording the pattern ID at save time means a Saved Pattern published later
+ * with a matching slug (by any user who can publish patterns) is never used
+ * unless an administrator saves this screen again.
  *
  * @param mixed $input Raw option value from the Settings API.
- * @return array<string, string>
+ * @return array<string, array{slug: string, pattern_id: int}>
  */
 function sanitize_settings( $input ): array {
 	if ( ! is_array( $input ) ) {
@@ -146,12 +150,14 @@ function sanitize_settings( $input ): array {
 	$allowed   = array_keys( get_manageable_post_types() );
 	$sanitized = array();
 
-	foreach ( $input as $post_type => $slug ) {
+	foreach ( $input as $post_type => $value ) {
 		$post_type = sanitize_key( (string) $post_type );
 		if ( '' === $post_type || ! in_array( $post_type, $allowed, true ) ) {
 			continue;
 		}
 
+		// The form sends a slug. add_option() runs this callback a second time, passing an entry saved by the first pass.
+		$slug = is_array( $value ) ? ( $value['slug'] ?? '' ) : $value;
 		if ( ! is_string( $slug ) ) {
 			continue;
 		}
@@ -160,7 +166,10 @@ function sanitize_settings( $input ): array {
 
 		// An empty slug clears the setting for that post type.
 		if ( '' !== $slug ) {
-			$sanitized[ $post_type ] = $slug;
+			$sanitized[ $post_type ] = array(
+				'slug'       => $slug,
+				'pattern_id' => find_saved_pattern_id( $slug ),
+			);
 		}
 	}
 
@@ -180,7 +189,7 @@ function render_settings_page(): void {
 	}
 
 	$post_types = get_manageable_post_types();
-	$saved      = get_saved_slugs();
+	$settings   = get_saved_settings();
 	?>
 	<div class="wrap">
 		<div class="blankless-header">
@@ -224,7 +233,13 @@ function render_settings_page(): void {
 				<tbody>
 				<?php
 				foreach ( $post_types as $type_slug => $obj ) :
-					$saved_slug = $saved[ $type_slug ] ?? '';
+					$saved_slug = $settings[ $type_slug ]['slug'] ?? '';
+					$pattern_id = $settings[ $type_slug ]['pattern_id'] ?? 0;
+					$linked     = $pattern_id > 0 ? get_post( $pattern_id ) : null;
+					// Show a renamed linked pattern's current slug, so saving again keeps the link.
+					if ( $linked instanceof WP_Post && 'wp_block' === $linked->post_type && 'publish' === $linked->post_status ) {
+						$saved_slug = $linked->post_name;
+					}
 					$field_id   = 'blankless-' . $type_slug;
 					$type_label = is_string( $obj->labels->singular_name ?? null ) ? $obj->labels->singular_name : $obj->label;
 					?>
@@ -243,7 +258,7 @@ function render_settings_page(): void {
 								list="blankless-patterns"
 							>
 						</td>
-						<td><?php echo wp_kses_post( render_pattern_status( $saved_slug ) ); ?></td>
+						<td><?php echo wp_kses_post( render_pattern_status( $saved_slug, $pattern_id ) ); ?></td>
 					</tr>
 				<?php endforeach; ?>
 				</tbody>
@@ -270,21 +285,40 @@ function get_manageable_post_types(): array {
 }
 
 /**
- * The saved post type => pattern slug map, ignoring malformed entries.
+ * The saved settings per post type, ignoring malformed entries.
  *
- * @return array<string, string>
+ * @return array<string, array{slug: string, pattern_id: int}>
  */
-function get_saved_slugs(): array {
+function get_saved_settings(): array {
 	$saved = get_option( OPTION_KEY, array() );
 	if ( ! is_array( $saved ) ) {
 		return array();
 	}
 
-	return array_filter(
-		$saved,
-		static fn( $slug, $post_type ): bool => is_string( $post_type ) && is_string( $slug ) && '' !== $slug,
-		ARRAY_FILTER_USE_BOTH
-	);
+	$settings = array();
+	foreach ( $saved as $post_type => $entry ) {
+		if ( ! is_string( $post_type ) || ! is_array( $entry ) || ! isset( $entry['slug'] ) || ! is_string( $entry['slug'] ) || '' === $entry['slug'] ) {
+			continue;
+		}
+
+		$settings[ $post_type ] = array(
+			'slug'       => $entry['slug'],
+			'pattern_id' => isset( $entry['pattern_id'] ) ? absint( $entry['pattern_id'] ) : 0,
+		);
+	}
+
+	return $settings;
+}
+
+/**
+ * The ID of the published Saved Pattern with this slug, or 0 when there is none.
+ *
+ * @param string $slug Pattern slug.
+ * @return int
+ */
+function find_saved_pattern_id( string $slug ): int {
+	$db = get_page_by_path( $slug, OBJECT, 'wp_block' );
+	return $db instanceof WP_Post && 'publish' === $db->post_status ? $db->ID : 0;
 }
 
 /**
@@ -302,20 +336,24 @@ function pattern_field( array $pattern, string $key ): string {
  * Locate the pattern a configured slug refers to.
  *
  * Resolution order:
- *   1. Published database pattern (wp_block post type), matched by post_name.
+ *   1. The published Saved Pattern (wp_block) recorded when the settings were saved.
  *   2. File-registered pattern, matched by full registered name.
  *   3. File-registered pattern, matched by the slug portion of the name.
  *
- * @param string $slug Configured pattern slug or registered name.
+ * Saved Patterns are never looked up by slug here, so one published after the
+ * settings were saved can't replace the pattern an administrator chose.
+ *
+ * @param string $slug       Configured pattern slug or registered name.
+ * @param int    $pattern_id Saved Pattern ID recorded at save time, or 0.
  * @return array{source: string, content: string, id: int}|null Source is 'database' or 'file'.
  */
-function locate_pattern( string $slug ): ?array {
+function locate_pattern( string $slug, int $pattern_id ): ?array {
 	if ( '' === $slug ) {
 		return null;
 	}
 
-	$db = get_page_by_path( $slug, OBJECT, 'wp_block' );
-	if ( $db instanceof WP_Post && 'publish' === $db->post_status && '' !== $db->post_content ) {
+	$db = $pattern_id > 0 ? get_post( $pattern_id ) : null;
+	if ( $db instanceof WP_Post && 'wp_block' === $db->post_type && 'publish' === $db->post_status && '' !== $db->post_content ) {
 		return array(
 			'source'  => 'database',
 			'content' => $db->post_content,
@@ -353,15 +391,16 @@ function locate_pattern( string $slug ): ?array {
  *
  * Returns safe HTML; caller should still pass through wp_kses_post() when echoing.
  *
- * @param string $slug Configured pattern slug or registered name.
+ * @param string $slug       Configured pattern slug or registered name.
+ * @param int    $pattern_id Saved Pattern ID recorded at save time, or 0.
  * @return string
  */
-function render_pattern_status( string $slug ): string {
+function render_pattern_status( string $slug, int $pattern_id ): string {
 	if ( '' === $slug ) {
 		return '<span class="blankless-status is-unset">' . esc_html__( 'Not set', 'blankless' ) . '</span>';
 	}
 
-	$pattern = locate_pattern( $slug );
+	$pattern = locate_pattern( $slug, $pattern_id );
 
 	if ( null === $pattern ) {
 		return '<span class="blankless-status is-missing">' . esc_html__( 'Not found', 'blankless' ) . '</span>';
@@ -484,7 +523,12 @@ function filter_default_content( $content, $post ) {
 		return $content;
 	}
 
-	$pattern = locate_pattern( get_saved_slugs()[ $post->post_type ] ?? '' );
+	$setting = get_saved_settings()[ $post->post_type ] ?? null;
+	if ( null === $setting ) {
+		return $content;
+	}
+
+	$pattern = locate_pattern( $setting['slug'], $setting['pattern_id'] );
 
 	return null === $pattern ? $content : $pattern['content'];
 }

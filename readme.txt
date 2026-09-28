@@ -55,13 +55,13 @@ Leave a post type blank to keep WordPress's normal empty editor. Blankless only 
 
 = How a slug is matched =
 
-When a new post is created, the plugin looks for the configured slug in this order and uses the first match:
+When you save the settings, a slug that matches a published pattern saved in the Site Editor is linked to that pattern. When a new post is created, the plugin uses the first match:
 
-1. A published pattern saved in the Site Editor whose slug matches
+1. The Saved Pattern linked when the settings were saved
 2. A pattern registered in code whose full name matches
 3. A pattern registered in code whose name ends with the slug
 
-Patterns saved in the Site Editor take priority over patterns in code. If the setting uses a short slug like `staff-profile`, you can override a theme's pattern by creating a Saved Pattern with that slug.
+Patterns saved in the Site Editor take priority over patterns in code. Edits to a linked pattern apply straight away, even if you rename it. A Saved Pattern published after you save the settings isn't used until you save them again, so another user can't replace your choice by publishing a pattern with the same slug. To override a theme's pattern with your own, create a Saved Pattern with the same short slug, like `staff-profile`, then save the settings.
 
 = How it differs from core starter patterns =
 
@@ -103,7 +103,7 @@ They show where the matched pattern lives. "Saved in Site Editor" means it was m
 
 = What if a Saved Pattern and a registered pattern share a slug? =
 
-The pattern saved in the Site Editor takes priority over the one in code. A pattern in code is only used when no published Saved Pattern matches.
+The pattern saved in the Site Editor takes priority over the one in code, as long as it was published when you last saved the settings. Otherwise the pattern in code is used.
 
 = Does this work with custom post types? =
 
@@ -139,7 +139,7 @@ Yes. Each site has its own settings. Deleting the plugin removes the setting fro
 
 = What does the plugin store, and what happens when I delete it? =
 
-It stores a single option, `blankless`, holding the post type to slug map. Deleting the plugin from the Plugins screen removes that option. Your patterns and posts are not touched.
+It stores a single option, `blankless`, holding each post type's slug and, for Saved Patterns, the ID of the pattern it's linked to. Deleting the plugin from the Plugins screen removes that option. Your patterns and posts are not touched.
 
 == Screenshots ==
 
@@ -158,6 +158,7 @@ Initial release.
 * Settings screen under Appearance to set a default block pattern for each public post type
 * Supports Saved Patterns and patterns registered by themes and plugins
 * Patterns saved in the Site Editor take priority over patterns in code with the same slug
+* Saved Patterns are linked when the settings are saved, so a pattern published later with the same slug can't replace your choice
 * Status column shows whether each slug matches a pattern
 * Slug fields suggest available patterns as you type
 * Only fills new posts that start out empty, and ignores unpublished Saved Patterns
