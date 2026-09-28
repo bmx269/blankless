@@ -1,20 +1,21 @@
-# Pattern Primer - Development Guide
+# Blankless - Development Guide
 
 ## Project Overview
 WordPress plugin that pre-populates the block editor with a configurable block pattern per post type. Pure PHP (no JS build step). Database-stored patterns take priority over file-registered patterns.
 
 ## Repository Structure
 ```
-├── pattern-primer.php   # Main plugin file (settings UI + default_content filter)
+├── blankless.php   # Main plugin file (settings UI + default_content filter)
 ├── uninstall.php             # Removes plugin option on delete
 ├── readme.txt                # WordPress.org plugin readme
 ├── README.md                 # GitHub-facing documentation
-├── languages/                # Translation files (POT); regenerate with `wp i18n make-pot . languages/pattern-primer.pot --exclude=.github,.claude`
+├── languages/                # Translation files (POT); regenerate with `wp i18n make-pot . languages/blankless.pot --slug=blankless --exclude=.github,.claude,.wordpress-org-src`
 ├── blueprint.json            # WordPress Playground blueprint (installs from WordPress.org)
-├── build.sh                  # Builds build/pattern-primer/ + .zip from .distignore; checks Version == Stable tag
+├── build.sh                  # Builds build/blankless/ + .zip from .distignore; checks Version == Stable tag
 ├── deploy.sh                 # Manual SVN deploy fallback (`./deploy.sh <svn-checkout>`), uses build.sh
 ├── .distignore               # Excluded from the WP.org package; must list /.git (10up deploy action)
-├── .wordpress-org/           # WP.org assets (banners, icons, screenshots) - if/when added
+├── .wordpress-org/           # WP.org assets (banners, icons, screenshots)
+├── .wordpress-org-src/       # HTML sources + render script for the drawn banners and screenshot 1
 └── .github/workflows/
     ├── plugin-check.yml      # CI: build, then Plugin Check the package, on push/PR to main
     ├── deploy.yml            # CD: GitHub release published -> version check -> SVN trunk + tag, zip attached to release
@@ -26,20 +27,20 @@ Release tooling mirrors `enable-navigation-icons` (already published on WP.org u
 ## Development Standards
 - Follow WordPress Coding Standards (WPCS) for PHP.
 - PHP 8.0+ minimum, WordPress 6.5+ minimum.
-- `declare(strict_types=1);` and namespace `PatternPrimer` for all PHP. Prefix every global name (options, setting groups, admin page slug, HTML ids) with `pattern_primer` / `pattern-primer`. WordPress.org review rejected the generic `pattern_primer` prefix, and a company prefix (Affinity Bridge, Small Robot) is not wanted.
-- All user-facing strings must use `__()` / `esc_html__()` / `esc_attr__()` with text domain `pattern-primer`.
+- `declare(strict_types=1);` and namespace `Blankless` for all PHP. Prefix every global name (options, setting groups, admin page slug, HTML ids) with `blankless` (`blankless_` for options and setting groups, `blankless-` for the page slug, CSS classes and HTML ids). WordPress.org review rejected an earlier generic prefix, the name "Pattern Primer" (it clashes with adactio's existing Pattern Primer tool) and "Pattern Kickoff" (too generic). "Blankless" was approved. A company prefix (Affinity Bridge, Small Robot) is not wanted.
+- All user-facing strings must use `__()` / `esc_html__()` / `esc_attr__()` with text domain `blankless`.
 - Sanitize all input (`sanitize_*`), escape all output (`esc_*`); pass HTML through `wp_kses_post()` where appropriate.
 - Capability checks (`current_user_can( 'manage_options' )`) on all admin actions.
 - Prefer root-cause fixes over surface workarounds.
 
 ## Key Architecture
-- Single option `pattern_primer` stores `[ post_type => pattern_slug ]` map.
+- Single option `blankless` stores `[ post_type => pattern_slug ]` map.
 - `default_content` filter resolves the saved slug to block markup at new-post time, only when the incoming content is empty.
 - Resolution order: (1) published `wp_block` post by `post_name`, (2) full registered pattern name, (3) registered pattern slug suffix.
 - Settings page lists every public post type (minus `attachment` and `wp_block`) with a live status badge per row.
 
 ## Versioning & Releases
-- Version must be synced in: `pattern-primer.php` (plugin header), `readme.txt` (`Stable tag`), and `LICENSE` (year).
+- Version must be synced in: `blankless.php` (plugin header), `readme.txt` (`Stable tag`), and `LICENSE` (year).
 - `Tested up to` in `readme.txt` should match the latest WP release verified against.
 - Update `Changelog` sections in both `README.md` and `readme.txt` for every release.
 - `build.sh` is the only place the package is assembled. Never hand-list files elsewhere; change `.distignore` instead.

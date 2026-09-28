@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Banner</title>
+<style>
+@font-face { font-family: Inter; src: url(https://cdn.jsdelivr.net/npm/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; }
+:root { --green: #1F6F5C; --dark: #1a5c4c; --gold: #F2B544; --ochre: #C98A12; --line: #BFD6CF; --ink: #1E1E1E; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 772px; height: 250px; overflow: hidden; background: var(--green); font-family: Inter, sans-serif; }
+.stage { position: relative; width: 772px; height: 250px; overflow: hidden; background: var(--green); }
+.halo { position: absolute; left: 385px; top: -230px; width: 790px; height: 790px; border-radius: 50%; background: var(--dark); opacity: .75; }
+.copy { position: absolute; left: 48px; top: 0; height: 250px; display: flex; flex-direction: column; justify-content: center; }
+h1 { color: #fff; font-weight: 800; font-size: 52px; letter-spacing: -1.6px; line-height: 1; }
+h2 { margin-top: 12px; color: #fff; font-size: 17px; line-height: 22px; font-weight: 700; letter-spacing: -.3px; }
+h2 em { font-style: normal; color: var(--gold); }
+p { margin-top: 8px; color: #D6E8E2; font-size: 12.5px; line-height: 17px; font-weight: 500; width: 240px; }
+.card { position: absolute; background: #fff; border-radius: 7px; box-shadow: 0 8px 22px rgba(0,0,0,.18); padding: 18px 12px 12px; }
+.tag { position: absolute; top: -10px; left: 10px; background: var(--ink); color: #fff; font-weight: 700; font-size: 8px; padding: 4px 8px; border-radius: 10px; }
+.bar { height: 7px; border-radius: 4px; background: var(--line); margin-top: 5px; }
+.title { height: 8px; border-radius: 4px; background: var(--green); }
+.img { position: relative; background: var(--gold); border-radius: 4px; overflow: hidden; }
+.img svg { position: absolute; left: 0; bottom: 0; width: 100%; height: 70%; }
+.post { left: 382px; top: 58px; width: 122px; height: 155px; transform: rotate(-4deg); }
+.page { left: 508px; top: 48px; width: 118px; height: 150px; }
+.staff { left: 628px; top: 62px; width: 124px; height: 155px; transform: rotate(4deg); }
+.plus { position: absolute; left: 482px; top: 182px; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); border: 4px solid var(--green); display: grid; place-items: center; }
+.plus::before, .plus::after { content: ""; position: absolute; background: #fff; border-radius: 1px; }
+.plus::before { width: 12px; height: 2.5px; } .plus::after { width: 2.5px; height: 12px; }
+.avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--gold); position: relative; overflow: hidden; }
+.avatar::before { content: ""; position: absolute; left: 12px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--ochre); }
+.avatar::after { content: ""; position: absolute; left: 7px; top: 25px; width: 24px; height: 20px; border-radius: 12px 12px 0 0; background: var(--ochre); }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 6px; }
+.pill { height: 10px; width: 54px; margin: 8px auto 4px; border-radius: 5px; background: var(--green); }
+.btn { height: 16px; width: 48px; border-radius: 8px; background: var(--ink); margin-top: 8px; }
+</style></head>
+<body><div class="stage">
+	<div class="halo"></div>
+	<div class="copy">
+		<h1>Blankless</h1>
+		<h2>Never start with a <em>blank</em> slate again.</h2>
+		<p>Start every new post from the block pattern you picked for its post type.</p>
+	</div>
+
+	<div class="card post"><span class="tag">Post</span>
+		<div class="title" style="width:66%"></div>
+		<div class="img" style="height:50px;margin-top:8px"><svg viewBox="0 0 100 35" preserveAspectRatio="none"><path d="M0 35 L30 8 L48 22 L60 14 L100 35 Z" fill="#C98A12"/></svg><span style="position:absolute;right:10px;top:6px;width:11px;height:11px;border-radius:50%;background:#FBEBC6"></span></div>
+		<div class="bar" style="margin-top:8px"></div><div class="bar"></div><div class="bar" style="width:62%"></div>
+	</div>
+	<div class="card page"><span class="tag">Page</span>
+		<div class="img" style="height:55px"><svg viewBox="0 0 100 35" preserveAspectRatio="none"><path d="M0 35 L0 30 L20 14 L38 26 L64 4 L100 35 Z" fill="#C98A12"/></svg></div>
+		<div class="pill"></div>
+		<div class="cols" style="margin-top:8px"><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar" style="width:62%"></div><div class="bar" style="width:52%"></div></div>
+	</div>
+	<div class="card staff"><span class="tag">Staff</span>
+		<div style="display:flex;gap:8px;align-items:center"><div class="avatar"></div><div style="flex:1"><div class="title" style="width:92%"></div><div class="bar" style="width:58%;height:5px"></div></div></div>
+		<div class="bar" style="margin-top:14px"></div><div class="bar"></div><div class="bar" style="width:70%"></div>
+		<div class="btn"></div>
+	</div>
+	<div class="plus"></div>
+</div></body></html>

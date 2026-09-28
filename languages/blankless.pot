@@ -1,32 +1,29 @@
 # Copyright (C) 2026 Trent Stromkins
-# This file is distributed under the same license as the Pattern Primer plugin.
+# This file is distributed under the same license as the Blankless – Default Block Patterns for Post Types plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Pattern Primer 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ab-pattern-defaults\n"
+"Project-Id-Version: Blankless – Default Block Patterns for Post Types 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/blankless\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-25T18:46:45+00:00\n"
+"POT-Creation-Date: 2026-09-28T17:41:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
-"X-Domain: pattern-primer\n"
+"X-Domain: blankless\n"
 
 #. Plugin Name of the plugin
-#: pattern-primer.php:49
-#: pattern-primer.php:50
-#: pattern-primer.php:189
-msgid "Pattern Primer"
+msgid "Blankless – Default Block Patterns for Post Types"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://github.com/bmx269/pattern-primer"
+msgid "https://github.com/bmx269/blankless"
 msgstr ""
 
 #. Description of the plugin
-msgid "Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code."
+msgid "Never start with a blank slate again. Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code."
 msgstr ""
 
 #. Author of the plugin
@@ -37,115 +34,125 @@ msgstr ""
 msgid "https://github.com/bmx269"
 msgstr ""
 
-#: pattern-primer.php:88
+#: blankless.php:49
+#: blankless.php:50
+#: blankless.php:189
+msgid "Blankless"
+msgstr ""
+
+#: blankless.php:88
 msgid "Getting started"
 msgstr ""
 
-#: pattern-primer.php:90
+#: blankless.php:90
 msgid "Build a pattern. Create one in the Site Editor (Appearance > Editor > Patterns), or use one that your theme or a plugin registers in code."
 msgstr ""
 
-#: pattern-primer.php:91
+#: blankless.php:91
 msgid "Enter its slug next to a post type on this screen. Start typing to see suggestions, then save."
 msgstr ""
 
-#: pattern-primer.php:92
+#: blankless.php:92
 msgid "Create a new post of that type. The editor opens with the pattern's blocks already in place."
 msgstr ""
 
-#: pattern-primer.php:94
+#: blankless.php:94
 msgid "Leave a post type blank to keep the normal empty editor. Only new posts that start out empty are filled, so existing content is never changed."
 msgstr ""
 
-#: pattern-primer.php:101
+#: blankless.php:101
 msgid "How matching works"
 msgstr ""
 
-#: pattern-primer.php:102
+#: blankless.php:102
 msgid "When a new post is created, the slug is looked up in this order and the first match is used:"
 msgstr ""
 
-#: pattern-primer.php:104
+#: blankless.php:104
 msgid "A published pattern saved in the Site Editor with that slug."
 msgstr ""
 
-#: pattern-primer.php:105
+#: blankless.php:105
 msgid "A pattern registered in code with that full name, such as mytheme/staff-profile."
 msgstr ""
 
-#: pattern-primer.php:106
+#: blankless.php:106
 msgid "A pattern registered in code whose name ends with the slug, such as staff-profile."
 msgstr ""
 
-#: pattern-primer.php:108
+#: blankless.php:108
 msgid "The Status column shows which one matched. \"Saved in Site Editor\" patterns have an Edit link. \"In Code\" patterns come from your theme or a plugin and are changed in their files."
 msgstr ""
 
-#: pattern-primer.php:113
+#: blankless.php:113
 msgid "More help"
 msgstr ""
 
-#: pattern-primer.php:114
+#: blankless.php:114
 msgid "Support forum"
 msgstr ""
 
-#: pattern-primer.php:115
+#: blankless.php:115
 msgid "GitHub"
 msgstr ""
 
-#: pattern-primer.php:190
+#: blankless.php:190
+msgid "Never start with a blank slate again."
+msgstr ""
+
+#: blankless.php:191
 msgid "Start every new post from the block pattern you picked for its post type."
 msgstr ""
 
-#: pattern-primer.php:199
+#: blankless.php:200
 msgid "Choose a pattern for each post type. New posts of that type open with its blocks already in place. Leave a field empty to keep the normal empty editor."
 msgstr ""
 
 #. translators: 1: example Saved Pattern slug, 2: example registered pattern name.
-#: pattern-primer.php:204
+#: blankless.php:205
 msgid "Use the slug of a pattern saved in the Site Editor (%1$s) or the name of a pattern registered in code by your theme or a plugin (%2$s). Start typing to see suggestions. If both match, the pattern saved in the Site Editor takes priority over the one in code."
 msgstr ""
 
-#: pattern-primer.php:218
+#: blankless.php:219
 msgid "Post type"
 msgstr ""
 
-#: pattern-primer.php:219
+#: blankless.php:220
 msgid "Pattern"
 msgstr ""
 
-#: pattern-primer.php:220
+#: blankless.php:221
 msgid "Status"
 msgstr ""
 
-#: pattern-primer.php:241
+#: blankless.php:242
 msgid "No default"
 msgstr ""
 
-#: pattern-primer.php:360
+#: blankless.php:361
 msgid "Not set"
 msgstr ""
 
-#: pattern-primer.php:366
+#: blankless.php:367
 msgid "Not found"
 msgstr ""
 
-#: pattern-primer.php:370
+#: blankless.php:371
 msgid "In Code"
 msgstr ""
 
-#: pattern-primer.php:374
+#: blankless.php:375
 msgid "Saved in Site Editor"
 msgstr ""
 
-#: pattern-primer.php:375
+#: blankless.php:376
 msgid "Saved in Patterns"
 msgstr ""
 
-#: pattern-primer.php:384
+#: blankless.php:385
 msgid "Edit"
 msgstr ""
 
-#: pattern-primer.php:461
+#: blankless.php:462
 msgid "Settings"
 msgstr ""

@@ -1,10 +1,10 @@
-# Pattern Primer
+# Blankless
 
-Start every new post, page or custom post type from a block pattern you pick. Patterns saved in the Site Editor take priority over patterns in code.
+Never start with a blank slate again. Every new post, page or custom post type opens with the block pattern you pick. Patterns saved in the Site Editor take priority over patterns in code.
 
-![How Pattern Primer works: build a pattern, pick it per post type, and Add New starts from it](.wordpress-org/screenshot-1.png)
+![How Blankless works: build a pattern, pick it per post type, and Add New starts from it](.wordpress-org/screenshot-1.png)
 
-**[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/pattern-primer/main/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
+**[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/blankless/main/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
 
 - **Requires:** WordPress 6.5+, PHP 8.0+
 - **License:** GPLv2 or later
@@ -13,14 +13,14 @@ Start every new post, page or custom post type from a block pattern you pick. Pa
 ## Getting started
 
 1. **Build a pattern.** Create one in the Site Editor (**Appearance → Editor → Patterns**), or use one that your theme or a plugin registers in code.
-2. **Pick it for a post type.** Go to **Appearance → Pattern Primer** and enter the pattern's slug next to each post type. The field suggests every pattern on the site as you type, and the Status column confirms it was found.
+2. **Pick it for a post type.** Go to **Appearance → Blankless** and enter the pattern's slug next to each post type. The field suggests every pattern on the site as you type, and the Status column confirms it was found.
 3. **Add New starts from it.** New posts of that type open with the pattern's blocks already in place.
 
 Leave a post type blank to keep the normal empty editor. Only new posts that start out empty are filled, so existing content is never changed. The settings screen's **Help** tab repeats these steps.
 
 ## Features
 
-- Settings page under **Appearance → Pattern Primer**, listing every public post type
+- Settings page under **Appearance → Blankless**, listing every public post type
 - Works with patterns saved in the Site Editor and patterns registered in code by themes and plugins
 - Patterns saved in the Site Editor take priority over patterns in code
 - Status column shows where each pattern was found, with an **Edit** link for Site Editor patterns
@@ -29,7 +29,7 @@ Leave a post type blank to keep the normal empty editor. Only new posts that sta
 
 ## Installation
 
-1. Copy the `pattern-primer` folder into `wp-content/plugins/`, or upload the zip via **Plugins → Add New → Upload Plugin**.
+1. Copy the `blankless` folder into `wp-content/plugins/`, or upload the zip via **Plugins → Add New → Upload Plugin**.
 2. Activate the plugin from the **Plugins** screen.
 3. Follow **Getting started** above.
 
@@ -58,9 +58,9 @@ Because the new post isn't empty, core's "Choose a pattern" starter-pattern moda
 
 ## Development
 
-Main plugin file: [`pattern-primer.php`](pattern-primer.php)
+Main plugin file: [`blankless.php`](blankless.php)
 
-Option key: `pattern_primer` (associative array, post_type => pattern slug)
+Option key: `blankless` (associative array, post_type => pattern slug)
 
 Try it locally with WordPress Playground:
 
@@ -71,7 +71,7 @@ npx @wp-playground/cli@latest server --auto-mount
 Build the distributable package (everything not listed in `.distignore`):
 
 ```bash
-./build.sh   # build/pattern-primer/ and build/pattern-primer.zip
+./build.sh   # build/blankless/ and build/blankless.zip
 ```
 
 CI builds the package and runs [Plugin Check](https://wordpress.org/plugins/plugin-check/) against it on every push and pull request to `main`.
@@ -86,8 +86,8 @@ Deploys need the `SVN_USERNAME` and `SVN_PASSWORD` repository secrets. `./deploy
 
 ## Support & Contribute
 
-- **Support:** [WordPress.org support forum](https://wordpress.org/support/plugin/pattern-primer/)
-- **Bugs and feature requests:** [GitHub issues](https://github.com/bmx269/pattern-primer/issues)
+- **Support:** [WordPress.org support forum](https://wordpress.org/support/plugin/blankless/)
+- **Bugs and feature requests:** [GitHub issues](https://github.com/bmx269/blankless/issues)
 - **Contribute:** pull requests are welcome against `main`.
 
 ## Changelog

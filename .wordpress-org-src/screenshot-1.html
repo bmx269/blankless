@@ -1,0 +1,105 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>How it works</title>
+<style>
+@font-face { font-family: Inter; src: url(https://cdn.jsdelivr.net/npm/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; }
+:root { --green: #1F6F5C; --gold: #F2B544; --ochre: #C98A12; --line: #BFD6CF; --ink: #1E1E1E; --muted: #50575e; --bg: #f4f6f5; --chip: #e3f1eb; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1280px; height: 800px; overflow: hidden; background: var(--bg); font-family: Inter, sans-serif; color: var(--ink); }
+.wrap { padding: 52px 64px 0; }
+h1 { font-size: 41px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; }
+h1 em { font-style: normal; color: var(--green); }
+.lede { margin-top: 10px; font-size: 18.5px; color: var(--muted); }
+.steps { margin-top: 40px; display: grid; grid-template-columns: 341px 366px 341px; justify-content: space-between; align-items: stretch; position: relative; }
+.card { background: #fff; border-radius: 15px; box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.04); padding: 26px 26px 0; height: 392px; position: relative; }
+.num { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; font-size: 17px; display: grid; place-items: center; }
+h2 { margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: -.3px; }
+.card p { margin-top: 8px; font-size: 16px; line-height: 22.5px; color: var(--muted); }
+.card p b { color: #2c3338; font-weight: 700; }
+.arrow { position: absolute; top: 187px; width: 20px; height: 20px; color: var(--green); }
+.art { position: absolute; left: 0; right: 0; bottom: 18px; display: flex; justify-content: center; }
+.doc { width: 150px; height: 160px; border-radius: 10px; background: #fff; padding: 16px 14px; position: relative; }
+.doc .t { height: 10px; width: 62%; background: var(--green); border-radius: 5px; }
+.doc .img { height: 50px; margin-top: 10px; background: var(--gold); border-radius: 5px; position: relative; overflow: hidden; }
+.doc .img svg { position: absolute; left: 0; bottom: 0; width: 100%; height: 65%; }
+.doc .b { height: 6px; background: var(--line); border-radius: 3px; margin-top: 9px; }
+.dashed { outline: 2px dashed var(--green); outline-offset: 5px; border: 1.5px solid #dcdcde; }
+.label { position: absolute; top: -18px; left: 16px; background: var(--ink); color: #fff; font-size: 12.5px; font-weight: 700; padding: 4px 10px; border-radius: 12px; white-space: nowrap; }
+.label.green { background: var(--green); }
+.newdoc { border: 2px solid var(--green); border-radius: 10px; }
+.fab { position: absolute; right: -24px; bottom: -22px; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); display: grid; place-items: center; box-shadow: 0 0 0 4px #fff; }
+.fab::before, .fab::after { content: ""; position: absolute; background: #fff; }
+.fab::before { width: 14px; height: 2px; } .fab::after { width: 2px; height: 14px; }
+.mini { width: 314px; border: 1.5px solid #dcdcde; border-radius: 9px; overflow: hidden; font-size: 13px; }
+.mini .hd { background: var(--green); color: #fff; font-weight: 800; padding: 9px 12px; font-size: 13.5px; }
+.mini .row { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-top: 1px solid #ececec; }
+.mini .row:first-of-type { border-top: 0; }
+.mini .k { width: 44px; flex: none; font-weight: 700; }
+.mini .in { flex: 1; min-width: 0; white-space: nowrap; font-weight: 400; border: 1px solid #c3c4c7; border-radius: 3px; padding: 4px 7px; font-family: Menlo, monospace; font-size: 12px; }
+.mini .in.ph { font-family: Inter, sans-serif; color: #8c8f94; }
+.chip { flex: none; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 10px; background: var(--chip); color: var(--green); white-space: nowrap; }
+.chip.off { background: #f0f0f1; color: var(--muted); }
+.match { margin-top: 30px; background: #fff; border-radius: 15px; box-shadow: 0 1px 3px rgba(0,0,0,.06); padding: 20px 26px; display: flex; align-items: center; gap: 13px; height: 102px; }
+.match .intro { width: 190px; flex: none; }
+.match .intro h3 { font-size: 17.5px; font-weight: 800; line-height: 21px; }
+.match .intro span { display: block; margin-top: 5px; font-size: 14px; color: var(--muted); }
+.m { flex: 1; display: flex; align-items: center; gap: 10px; background: var(--bg); border-radius: 9px; padding: 12px 14px; height: 60px; }
+.m .num { width: 26px; height: 26px; font-size: 13px; flex: none; }
+.m b { display: block; font-size: 15px; font-weight: 800; }
+.m code { font-weight: 400; font-family: Menlo, monospace; font-size: 12.5px; color: var(--green); }
+.m small { font-size: 14px; color: #2c3338; }
+.chev { color: #8c8f94; font-size: 16px; flex: none; }
+.foot { margin-top: 26px; font-size: 14.5px; color: var(--muted); line-height: 19px; padding-left: 4px; }
+.foot b { color: var(--ink); }
+</style></head>
+<body><div class="wrap">
+	<h1>How <em>Blankless</em> works</h1>
+	<p class="lede">Set it up once. Every new post of that type starts from the right blocks.</p>
+
+	<div class="steps">
+		<div class="card">
+			<div class="num">1</div>
+			<h2>Build a pattern</h2>
+			<p>Create a pattern in the Site Editor, or use one that your theme or a plugin registers in code.</p>
+			<div class="art"><div class="doc dashed"><span class="label">staff-profile</span>
+				<div class="t"></div>
+				<div class="img"><svg viewBox="0 0 100 35" preserveAspectRatio="none"><path d="M0 35 L25 10 L45 24 L62 14 L100 35 Z" fill="#C98A12"/></svg></div>
+				<div class="b"></div><div class="b"></div><div class="b" style="width:48%"></div>
+			</div></div>
+		</div>
+		<div class="card">
+			<div class="num">2</div>
+			<h2>Pick it per post type</h2>
+			<p>Go to <b>Appearance → Blankless</b> and enter the pattern's slug next to each post type.</p>
+			<div class="art"><div class="mini">
+				<div class="hd">Blankless</div>
+				<div class="row"><span class="k">Staff</span><span class="in">staff-profile</span><span class="chip">Saved in Site Editor</span></div>
+				<div class="row"><span class="k">Page</span><span class="in">mytheme/landing</span><span class="chip">In Code</span></div>
+				<div class="row"><span class="k">Post</span><span class="in ph">No default</span><span class="chip off">Not set</span></div>
+			</div></div>
+		</div>
+		<div class="card">
+			<div class="num">3</div>
+			<h2>Add New starts from it</h2>
+			<p>Create a new post of that type and the editor opens with the pattern's blocks already in place.</p>
+			<div class="art"><div class="doc newdoc"><span class="label green">New Staff profile</span>
+				<div class="t"></div>
+				<div class="img"><svg viewBox="0 0 100 35" preserveAspectRatio="none"><path d="M0 35 L25 10 L45 24 L62 14 L100 35 Z" fill="#C98A12"/></svg></div>
+				<div class="b"></div><div class="b"></div><div class="b" style="width:48%"></div>
+				<span class="fab"></span>
+			</div></div>
+		</div>
+		<svg class="arrow" style="left:351px" viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+		<svg class="arrow" style="left:769px" viewBox="0 0 20 20"><path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+	</div>
+
+	<div class="match">
+		<div class="intro"><h3>How a slug is matched</h3><span>First match is used</span></div>
+		<div class="m"><div class="num">1</div><div><b>Saved in Site Editor</b><small>Slug <code>staff-profile</code></small></div></div>
+		<span class="chev">›</span>
+		<div class="m"><div class="num">2</div><div><b>In Code, full name</b><code>mytheme/staff-profile</code></div></div>
+		<span class="chev">›</span>
+		<div class="m"><div class="num">3</div><div><b>In Code, short name</b><small>After the slash <code>staff-profile</code></small></div></div>
+	</div>
+
+	<p class="foot"><b>Never overwrites anything.</b> Only new posts that start out empty are filled, drafts of Saved Patterns are skipped, and a post type left blank keeps the normal empty editor.</p>
+</div></body></html>

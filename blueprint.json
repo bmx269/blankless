@@ -1,5 +1,5 @@
 {
-	"landingPage": "/wp-admin/themes.php?page=pattern-primer",
+	"landingPage": "/wp-admin/themes.php?page=blankless",
 	"preferredVersions": {
 		"wp": "latest",
 		"php": "8.3"
@@ -12,7 +12,7 @@
 			"step": "installPlugin",
 			"pluginData": {
 				"resource": "wordpress.org/plugins",
-				"slug": "pattern-primer"
+				"slug": "blankless"
 			},
 			"options": {
 				"activate": true
@@ -20,7 +20,7 @@
 		},
 		{
 			"step": "runPHP",
-			"code": "<?php\nrequire '/wordpress/wp-load.php';\n\n$content = '<!-- wp:heading --><h2 class=\"wp-block-heading\">Summary</h2><!-- /wp:heading -->'\n\t. '<!-- wp:paragraph --><p>One or two sentences on what this post covers.</p><!-- /wp:paragraph -->'\n\t. '<!-- wp:heading --><h2 class=\"wp-block-heading\">Details</h2><!-- /wp:heading -->'\n\t. '<!-- wp:paragraph --><p>The main content goes here.</p><!-- /wp:paragraph -->'\n\t. '<!-- wp:heading --><h2 class=\"wp-block-heading\">Next steps</h2><!-- /wp:heading -->'\n\t. '<!-- wp:list --><ul class=\"wp-block-list\"><!-- wp:list-item --><li>Link to a related post</li><!-- /wp:list-item --></ul><!-- /wp:list -->';\n\nwp_insert_post(\n\tarray(\n\t\t'post_type'    => 'wp_block',\n\t\t'post_status'  => 'publish',\n\t\t'post_title'   => 'Post starter',\n\t\t'post_name'    => 'post-starter',\n\t\t'post_content' => $content,\n\t\t'meta_input'   => array( 'wp_pattern_sync_status' => 'unsynced' ),\n\t)\n);\n\nupdate_option( 'pattern_primer', array( 'post' => 'post-starter' ) );\n"
+			"code": "<?php\nrequire '/wordpress/wp-load.php';\n\n$content = '<!-- wp:heading --><h2 class=\"wp-block-heading\">Summary</h2><!-- /wp:heading -->'\n\t. '<!-- wp:paragraph --><p>One or two sentences on what this post covers.</p><!-- /wp:paragraph -->'\n\t. '<!-- wp:heading --><h2 class=\"wp-block-heading\">Details</h2><!-- /wp:heading -->'\n\t. '<!-- wp:paragraph --><p>The main content goes here.</p><!-- /wp:paragraph -->'\n\t. '<!-- wp:heading --><h2 class=\"wp-block-heading\">Next steps</h2><!-- /wp:heading -->'\n\t. '<!-- wp:list --><ul class=\"wp-block-list\"><!-- wp:list-item --><li>Link to a related post</li><!-- /wp:list-item --></ul><!-- /wp:list -->';\n\nwp_insert_post(\n\tarray(\n\t\t'post_type'    => 'wp_block',\n\t\t'post_status'  => 'publish',\n\t\t'post_title'   => 'Post starter',\n\t\t'post_name'    => 'post-starter',\n\t\t'post_content' => $content,\n\t\t'meta_input'   => array( 'wp_pattern_sync_status' => 'unsynced' ),\n\t)\n);\n\nupdate_option( 'blankless', array( 'post' => 'post-starter' ) );\n"
 		},
 		{
 			"step": "login",

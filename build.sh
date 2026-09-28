@@ -2,8 +2,8 @@
 #
 # Build the distributable plugin package.
 #
-# Copies every file not listed in .distignore into build/pattern-primer/
-# and zips it as build/pattern-primer.zip (the file to upload to
+# Copies every file not listed in .distignore into build/blankless/
+# and zips it as build/blankless.zip (the file to upload to
 # WordPress.org). Fails if the plugin header Version and the readme.txt
 # Stable tag disagree.
 #
@@ -14,7 +14,7 @@
 
 set -euo pipefail
 
-PLUGIN_SLUG="pattern-primer"
+PLUGIN_SLUG="blankless"
 PLUGIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUILD_DIR="$PLUGIN_DIR/build"
 

@@ -6,7 +6,7 @@
 #   ./deploy.sh <svn-checkout-path>
 #
 # Example:
-#   ./deploy.sh ../pattern-primer-svn
+#   ./deploy.sh ../blankless-svn
 #
 # Prerequisites:
 #   - SVN checkout must already exist
@@ -14,7 +14,7 @@
 
 set -euo pipefail
 
-PLUGIN_SLUG="pattern-primer"
+PLUGIN_SLUG="blankless"
 PLUGIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Get version from the main plugin file header.
@@ -31,7 +31,7 @@ if [ $# -ge 1 ]; then
 else
     echo "Usage: $0 <svn-checkout-path>"
     echo ""
-    echo "Example: $0 /path/to/svn/pattern-primer"
+    echo "Example: $0 /path/to/svn/blankless"
     exit 1
 fi
 

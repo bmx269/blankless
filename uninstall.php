@@ -1,15 +1,15 @@
 <?php
 /**
- * Uninstall routine for Pattern Primer.
+ * Uninstall routine for Blankless.
  *
  * Runs when the user deletes the plugin from the Plugins screen.
  *
- * @package PatternPrimer
+ * @package Blankless
  */
 
 declare(strict_types=1);
 
-namespace PatternPrimer;
+namespace Blankless;
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
@@ -19,7 +19,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  * Delete the plugin option from every site.
  */
 function uninstall(): void {
-	$option = 'pattern_primer';
+	$option = 'blankless';
 
 	if ( ! is_multisite() ) {
 		delete_option( $option );

@@ -27,7 +27,7 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: pattern-primer
+          SLUG: blankless
 
       - name: Attach zip to the GitHub release
         run: gh release upload "$GITHUB_REF_NAME" "${{ steps.deploy.outputs.zip-path }}" --clobber

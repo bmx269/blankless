@@ -1,6 +1,6 @@
-/* Pattern Primer settings screen (Appearance -> Pattern Primer). */
+/* Blankless settings screen (Appearance -> Blankless). */
 
-.pattern-primer-header {
+.blankless-header {
 	display: flex;
 	align-items: center;
 	gap: 16px;
@@ -13,7 +13,7 @@
 	color: #fff;
 }
 
-.pattern-primer-header img {
+.blankless-header img {
 	flex: none;
 	width: 56px;
 	height: 56px;
@@ -21,7 +21,7 @@
 	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
 }
 
-.wrap .pattern-primer-header h1 {
+.wrap .blankless-header h1 {
 	margin: 0;
 	padding: 0;
 	color: #fff;
@@ -30,52 +30,58 @@
 	line-height: 1.3;
 }
 
-.pattern-primer-header p {
+.blankless-header p {
 	margin: 2px 0 0;
 	color: #d6e8e2;
 	font-size: 14px;
 }
 
-.pattern-primer-intro {
+.blankless-header .blankless-tagline {
+	color: #fff;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.blankless-intro {
 	max-width: 960px;
 	margin: 16px 0;
 }
 
-.pattern-primer-intro p {
+.blankless-intro p {
 	margin: 0 0 8px;
 	font-size: 14px;
 }
 
-.pattern-primer-table {
+.blankless-table {
 	max-width: 960px;
 }
 
-.pattern-primer-table .column-type {
+.blankless-table .column-type {
 	width: 28%;
 }
 
-.pattern-primer-table .column-status {
+.blankless-table .column-status {
 	width: 24%;
 }
 
-.pattern-primer-table td {
+.blankless-table td {
 	vertical-align: middle;
 }
 
-.pattern-primer-table input[type="text"] {
+.blankless-table input[type="text"] {
 	width: 100%;
 }
 
-.pattern-primer-table label {
+.blankless-table label {
 	display: block;
 	font-weight: 600;
 }
 
-.pattern-primer-table td code {
+.blankless-table td code {
 	font-size: 12px;
 }
 
-.pattern-primer-status {
+.blankless-status {
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
@@ -87,7 +93,7 @@
 	white-space: nowrap;
 }
 
-.pattern-primer-status::before {
+.blankless-status::before {
 	content: "";
 	width: 6px;
 	height: 6px;
@@ -95,22 +101,22 @@
 	background: currentColor;
 }
 
-.pattern-primer-status.is-found {
+.blankless-status.is-found {
 	background: #e3f1eb;
 	color: #1a5c4c;
 }
 
-.pattern-primer-status.is-missing {
+.blankless-status.is-missing {
 	background: #fcf0f1;
 	color: #a52a2b;
 }
 
-.pattern-primer-status.is-unset {
+.blankless-status.is-unset {
 	background: #f0f0f1;
 	color: #50575e;
 }
 
-.pattern-primer-edit {
+.blankless-edit {
 	margin-left: 6px;
 	font-size: 13px;
 }

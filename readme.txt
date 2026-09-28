@@ -1,4 +1,4 @@
-=== Pattern Primer ===
+=== Blankless – Default Block Patterns for Post Types ===
 Contributors: bmx269
 Tags: block patterns, default content, post types, block editor, gutenberg
 Requires at least: 6.5
@@ -8,29 +8,29 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-Start every new post, page or custom post type from a block pattern you pick. One default per post type, set from a settings screen.
+Never start with a blank slate again. Every new post, page or custom post type opens with the block pattern you pick.
 
 == Description ==
 
-Pattern Primer lets a site administrator pick a block pattern for each post type. When someone creates a new post of that type, the editor opens with the pattern's blocks already in place.
+Blankless lets a site administrator pick a block pattern for each post type. When someone creates a new post of that type, the editor opens with the pattern's blocks already in place.
 
 It's built for sites where every post of a given type follows the same structure: staff profiles, locations, events, case studies, press releases. Build the layout once as a pattern, point the post type at it, and writers start from the right blocks every time.
 
 = Getting started =
 
 1. **Build a pattern.** Create a pattern in the Site Editor (*Appearance → Editor → Patterns*), or use one that your theme or a plugin registers in code.
-2. **Pick it for a post type.** Go to *Appearance → Pattern Primer* and enter the pattern's slug next to Posts, Pages or any custom post type. Start typing and the field suggests every pattern on the site. The Status column confirms each one is found.
+2. **Pick it for a post type.** Go to *Appearance → Blankless* and enter the pattern's slug next to Posts, Pages or any custom post type. Start typing and the field suggests every pattern on the site. The Status column confirms each one is found.
 3. **Add New starts from it.** Create a new post of that type and the editor opens with the pattern's blocks already in place, ready to edit.
 
-Leave a post type blank to keep WordPress's normal empty editor. Pattern Primer only fills new posts that start out empty, so it never changes content you've already written.
+Leave a post type blank to keep WordPress's normal empty editor. Blankless only fills new posts that start out empty, so it never changes content you've already written.
 
-**[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/pattern-primer/main/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
+**[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/blankless/main/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
 
 = Key features =
 
 **Defaults per post type**
 
-* One settings screen under *Appearance → Pattern Primer* lists every public post type, including custom post types
+* One settings screen under *Appearance → Blankless* lists every public post type, including custom post types
 * Set a different pattern for posts, pages and each custom post type, or leave one blank to keep the empty editor
 * No theme code, `block.json` metadata or template changes required
 
@@ -75,16 +75,16 @@ When a post type has a default set, the post is no longer empty, so core's "Choo
 
 = Support & Contribute =
 
-* **Support:** ask questions and report problems in the [support forum](https://wordpress.org/support/plugin/pattern-primer/).
-* **Contribute:** the code lives on [GitHub](https://github.com/bmx269/pattern-primer). Bug reports and pull requests are welcome in the [issue tracker](https://github.com/bmx269/pattern-primer/issues).
+* **Support:** ask questions and report problems in the [support forum](https://wordpress.org/support/plugin/blankless/).
+* **Contribute:** the code lives on [GitHub](https://github.com/bmx269/blankless). Bug reports and pull requests are welcome in the [issue tracker](https://github.com/bmx269/blankless/issues).
 
-Pattern Primer is written and maintained by Trent Stromkins.
+Blankless is written and maintained by Trent Stromkins.
 
 == Installation ==
 
-1. Install the plugin from *Plugins → Add New Plugin* by searching for "Pattern Primer", or upload the `pattern-primer` folder to `/wp-content/plugins/`.
+1. Install the plugin from *Plugins → Add New Plugin* by searching for "Blankless", or upload the `blankless` folder to `/wp-content/plugins/`.
 2. Activate the plugin through the *Plugins* screen.
-3. Go to *Appearance → Pattern Primer*.
+3. Go to *Appearance → Blankless*.
 4. Enter a pattern slug next to each post type you want to pre-fill. The field suggests available patterns as you type.
 5. Save, then check the Status column. A green tick means the slug matched a pattern.
 6. Create a new post of that type to see the pattern in the editor.
@@ -139,11 +139,11 @@ Yes. Each site has its own settings. Deleting the plugin removes the setting fro
 
 = What does the plugin store, and what happens when I delete it? =
 
-It stores a single option, `pattern_primer`, holding the post type to slug map. Deleting the plugin from the Plugins screen removes that option. Your patterns and posts are not touched.
+It stores a single option, `blankless`, holding the post type to slug map. Deleting the plugin from the Plugins screen removes that option. Your patterns and posts are not touched.
 
 == Screenshots ==
 
-1. How Pattern Primer works: build a pattern, pick it for a post type, and every new post of that type starts from it.
+1. How Blankless works: build a pattern, pick it for a post type, and every new post of that type starts from it.
 2. The settings screen under Appearance lists every public post type. Leave a slug empty and that post type keeps WordPress's normal empty editor, as Location does here.
 3. After saving, the Status column shows where each pattern was found: saved in the Site Editor, with a link to edit it, or registered in code.
 4. A new Staff profile opens with the "Staff profile" pattern already in place.
@@ -167,4 +167,4 @@ Initial release.
 == Upgrade Notice ==
 
 = 1.0.0 =
-Initial release of Pattern Primer.
+Initial release of Blankless.

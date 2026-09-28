@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Pattern Primer
- * Plugin URI:        https://github.com/bmx269/pattern-primer
- * Description:       Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code.
+ * Plugin Name:       Blankless – Default Block Patterns for Post Types
+ * Plugin URI:        https://github.com/bmx269/blankless
+ * Description:       Never start with a blank slate again. Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code.
  * Version:           1.0.0
  * Requires at least: 6.5
  * Requires PHP:      8.0
@@ -10,15 +10,15 @@
  * Author URI:        https://github.com/bmx269
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * Text Domain:       pattern-primer
+ * Text Domain:       blankless
  * Domain Path:       /languages
  *
- * @package PatternPrimer
+ * @package Blankless
  */
 
 declare(strict_types=1);
 
-namespace PatternPrimer;
+namespace Blankless;
 
 use WP_Block_Patterns_Registry;
 use WP_Post;
@@ -28,14 +28,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const OPTION_KEY = 'pattern_primer';
+const OPTION_KEY = 'blankless';
 
 add_action( 'admin_menu', __NAMESPACE__ . '\\register_settings_page' );
 add_action( 'admin_init', __NAMESPACE__ . '\\register_settings' );
 add_filter( 'default_content', __NAMESPACE__ . '\\filter_default_content', 10, 2 );
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), __NAMESPACE__ . '\\add_settings_link' );
 add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_admin_assets' );
-add_action( 'load-appearance_page_pattern-primer', __NAMESPACE__ . '\\add_help_tabs' );
+add_action( 'load-appearance_page_blankless', __NAMESPACE__ . '\\add_help_tabs' );
 
 // ---------------------------------------------------------------------------
 // Settings registration
@@ -46,10 +46,10 @@ add_action( 'load-appearance_page_pattern-primer', __NAMESPACE__ . '\\add_help_t
  */
 function register_settings_page(): void {
 	add_theme_page(
-		__( 'Pattern Primer', 'pattern-primer' ),
-		__( 'Pattern Primer', 'pattern-primer' ),
+		__( 'Blankless', 'blankless' ),
+		__( 'Blankless', 'blankless' ),
 		'manage_options',
-		'pattern-primer',
+		'blankless',
 		__NAMESPACE__ . '\\render_settings_page'
 	);
 }
@@ -60,13 +60,13 @@ function register_settings_page(): void {
  * @param string $hook_suffix Current admin page hook.
  */
 function enqueue_admin_assets( string $hook_suffix ): void {
-	if ( 'appearance_page_pattern-primer' !== $hook_suffix ) {
+	if ( 'appearance_page_blankless' !== $hook_suffix ) {
 		return;
 	}
 
 	$path = plugin_dir_path( __FILE__ ) . 'assets/admin.css';
 	wp_enqueue_style(
-		'pattern-primer-admin',
+		'blankless-admin',
 		plugins_url( 'assets/admin.css', __FILE__ ),
 		array(),
 		(string) filemtime( $path )
@@ -84,35 +84,35 @@ function add_help_tabs(): void {
 
 	$screen->add_help_tab(
 		array(
-			'id'      => 'pattern-primer-getting-started',
-			'title'   => __( 'Getting started', 'pattern-primer' ),
+			'id'      => 'blankless-getting-started',
+			'title'   => __( 'Getting started', 'blankless' ),
 			'content' => '<ol>'
-				. '<li>' . esc_html__( 'Build a pattern. Create one in the Site Editor (Appearance > Editor > Patterns), or use one that your theme or a plugin registers in code.', 'pattern-primer' ) . '</li>'
-				. '<li>' . esc_html__( 'Enter its slug next to a post type on this screen. Start typing to see suggestions, then save.', 'pattern-primer' ) . '</li>'
-				. '<li>' . esc_html__( 'Create a new post of that type. The editor opens with the pattern\'s blocks already in place.', 'pattern-primer' ) . '</li>'
+				. '<li>' . esc_html__( 'Build a pattern. Create one in the Site Editor (Appearance > Editor > Patterns), or use one that your theme or a plugin registers in code.', 'blankless' ) . '</li>'
+				. '<li>' . esc_html__( 'Enter its slug next to a post type on this screen. Start typing to see suggestions, then save.', 'blankless' ) . '</li>'
+				. '<li>' . esc_html__( 'Create a new post of that type. The editor opens with the pattern\'s blocks already in place.', 'blankless' ) . '</li>'
 				. '</ol>'
-				. '<p>' . esc_html__( 'Leave a post type blank to keep the normal empty editor. Only new posts that start out empty are filled, so existing content is never changed.', 'pattern-primer' ) . '</p>',
+				. '<p>' . esc_html__( 'Leave a post type blank to keep the normal empty editor. Only new posts that start out empty are filled, so existing content is never changed.', 'blankless' ) . '</p>',
 		)
 	);
 
 	$screen->add_help_tab(
 		array(
-			'id'      => 'pattern-primer-matching',
-			'title'   => __( 'How matching works', 'pattern-primer' ),
-			'content' => '<p>' . esc_html__( 'When a new post is created, the slug is looked up in this order and the first match is used:', 'pattern-primer' ) . '</p>'
+			'id'      => 'blankless-matching',
+			'title'   => __( 'How matching works', 'blankless' ),
+			'content' => '<p>' . esc_html__( 'When a new post is created, the slug is looked up in this order and the first match is used:', 'blankless' ) . '</p>'
 				. '<ol>'
-				. '<li>' . esc_html__( 'A published pattern saved in the Site Editor with that slug.', 'pattern-primer' ) . '</li>'
-				. '<li>' . esc_html__( 'A pattern registered in code with that full name, such as mytheme/staff-profile.', 'pattern-primer' ) . '</li>'
-				. '<li>' . esc_html__( 'A pattern registered in code whose name ends with the slug, such as staff-profile.', 'pattern-primer' ) . '</li>'
+				. '<li>' . esc_html__( 'A published pattern saved in the Site Editor with that slug.', 'blankless' ) . '</li>'
+				. '<li>' . esc_html__( 'A pattern registered in code with that full name, such as mytheme/staff-profile.', 'blankless' ) . '</li>'
+				. '<li>' . esc_html__( 'A pattern registered in code whose name ends with the slug, such as staff-profile.', 'blankless' ) . '</li>'
 				. '</ol>'
-				. '<p>' . esc_html__( 'The Status column shows which one matched. "Saved in Site Editor" patterns have an Edit link. "In Code" patterns come from your theme or a plugin and are changed in their files.', 'pattern-primer' ) . '</p>',
+				. '<p>' . esc_html__( 'The Status column shows which one matched. "Saved in Site Editor" patterns have an Edit link. "In Code" patterns come from your theme or a plugin and are changed in their files.', 'blankless' ) . '</p>',
 		)
 	);
 
 	$screen->set_help_sidebar(
-		'<p><strong>' . esc_html__( 'More help', 'pattern-primer' ) . '</strong></p>'
-		. '<p><a href="https://wordpress.org/support/plugin/pattern-primer/">' . esc_html__( 'Support forum', 'pattern-primer' ) . '</a></p>'
-		. '<p><a href="https://github.com/bmx269/pattern-primer">' . esc_html__( 'GitHub', 'pattern-primer' ) . '</a></p>'
+		'<p><strong>' . esc_html__( 'More help', 'blankless' ) . '</strong></p>'
+		. '<p><a href="https://wordpress.org/support/plugin/blankless/">' . esc_html__( 'Support forum', 'blankless' ) . '</a></p>'
+		. '<p><a href="https://github.com/bmx269/blankless">' . esc_html__( 'GitHub', 'blankless' ) . '</a></p>'
 	);
 }
 
@@ -121,7 +121,7 @@ function add_help_tabs(): void {
  */
 function register_settings(): void {
 	register_setting(
-		'pattern_primer_group',
+		'blankless_group',
 		OPTION_KEY,
 		array(
 			'type'              => 'array',
@@ -183,11 +183,12 @@ function render_settings_page(): void {
 	$saved      = get_saved_slugs();
 	?>
 	<div class="wrap">
-		<div class="pattern-primer-header">
+		<div class="blankless-header">
 			<img src="<?php echo esc_url( plugins_url( 'assets/icon.svg', __FILE__ ) ); ?>" alt="">
 			<div>
-				<h1><?php echo esc_html__( 'Pattern Primer', 'pattern-primer' ); ?></h1>
-				<p><?php esc_html_e( 'Start every new post from the block pattern you picked for its post type.', 'pattern-primer' ); ?></p>
+				<h1><?php echo esc_html__( 'Blankless', 'blankless' ); ?></h1>
+				<p class="blankless-tagline"><?php esc_html_e( 'Never start with a blank slate again.', 'blankless' ); ?></p>
+				<p><?php esc_html_e( 'Start every new post from the block pattern you picked for its post type.', 'blankless' ); ?></p>
 			</div>
 		</div>
 		<hr class="wp-header-end">
@@ -195,13 +196,13 @@ function render_settings_page(): void {
 		// Pages outside the Settings menu don't print save notices automatically.
 		settings_errors();
 		?>
-		<div class="pattern-primer-intro">
-			<p><?php esc_html_e( 'Choose a pattern for each post type. New posts of that type open with its blocks already in place. Leave a field empty to keep the normal empty editor.', 'pattern-primer' ); ?></p>
+		<div class="blankless-intro">
+			<p><?php esc_html_e( 'Choose a pattern for each post type. New posts of that type open with its blocks already in place. Leave a field empty to keep the normal empty editor.', 'blankless' ); ?></p>
 			<p>
 				<?php
 				printf(
 					/* translators: 1: example Saved Pattern slug, 2: example registered pattern name. */
-					esc_html__( 'Use the slug of a pattern saved in the Site Editor (%1$s) or the name of a pattern registered in code by your theme or a plugin (%2$s). Start typing to see suggestions. If both match, the pattern saved in the Site Editor takes priority over the one in code.', 'pattern-primer' ),
+					esc_html__( 'Use the slug of a pattern saved in the Site Editor (%1$s) or the name of a pattern registered in code by your theme or a plugin (%2$s). Start typing to see suggestions. If both match, the pattern saved in the Site Editor takes priority over the one in code.', 'blankless' ),
 					'<code>staff-profile</code>',
 					'<code>mytheme/staff-profile</code>'
 				);
@@ -210,21 +211,21 @@ function render_settings_page(): void {
 		</div>
 
 		<form method="post" action="options.php">
-			<?php settings_fields( 'pattern_primer_group' ); ?>
+			<?php settings_fields( 'blankless_group' ); ?>
 			<?php render_pattern_datalist(); ?>
-			<table class="widefat striped pattern-primer-table">
+			<table class="widefat striped blankless-table">
 				<thead>
 					<tr>
-						<th class="column-type"><?php esc_html_e( 'Post type', 'pattern-primer' ); ?></th>
-						<th><?php esc_html_e( 'Pattern', 'pattern-primer' ); ?></th>
-						<th class="column-status"><?php esc_html_e( 'Status', 'pattern-primer' ); ?></th>
+						<th class="column-type"><?php esc_html_e( 'Post type', 'blankless' ); ?></th>
+						<th><?php esc_html_e( 'Pattern', 'blankless' ); ?></th>
+						<th class="column-status"><?php esc_html_e( 'Status', 'blankless' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 				<?php
 				foreach ( $post_types as $type_slug => $obj ) :
 					$saved_slug = $saved[ $type_slug ] ?? '';
-					$field_id   = 'pattern-primer-' . $type_slug;
+					$field_id   = 'blankless-' . $type_slug;
 					$type_label = is_string( $obj->labels->singular_name ?? null ) ? $obj->labels->singular_name : $obj->label;
 					?>
 					<tr>
@@ -238,8 +239,8 @@ function render_settings_page(): void {
 								id="<?php echo esc_attr( $field_id ); ?>"
 								name="<?php echo esc_attr( OPTION_KEY . '[' . $type_slug . ']' ); ?>"
 								value="<?php echo esc_attr( $saved_slug ); ?>"
-								placeholder="<?php esc_attr_e( 'No default', 'pattern-primer' ); ?>"
-								list="pattern-primer-patterns"
+								placeholder="<?php esc_attr_e( 'No default', 'blankless' ); ?>"
+								list="blankless-patterns"
 							>
 						</td>
 						<td><?php echo wp_kses_post( render_pattern_status( $saved_slug ) ); ?></td>
@@ -357,31 +358,31 @@ function locate_pattern( string $slug ): ?array {
  */
 function render_pattern_status( string $slug ): string {
 	if ( '' === $slug ) {
-		return '<span class="pattern-primer-status is-unset">' . esc_html__( 'Not set', 'pattern-primer' ) . '</span>';
+		return '<span class="blankless-status is-unset">' . esc_html__( 'Not set', 'blankless' ) . '</span>';
 	}
 
 	$pattern = locate_pattern( $slug );
 
 	if ( null === $pattern ) {
-		return '<span class="pattern-primer-status is-missing">' . esc_html__( 'Not found', 'pattern-primer' ) . '</span>';
+		return '<span class="blankless-status is-missing">' . esc_html__( 'Not found', 'blankless' ) . '</span>';
 	}
 
 	if ( 'database' !== $pattern['source'] ) {
-		return '<span class="pattern-primer-status is-found">' . esc_html__( 'In Code', 'pattern-primer' ) . '</span>';
+		return '<span class="blankless-status is-found">' . esc_html__( 'In Code', 'blankless' ) . '</span>';
 	}
 
 	$label = wp_is_block_theme()
-		? __( 'Saved in Site Editor', 'pattern-primer' )
-		: __( 'Saved in Patterns', 'pattern-primer' );
+		? __( 'Saved in Site Editor', 'blankless' )
+		: __( 'Saved in Patterns', 'blankless' );
 
-	$html = '<span class="pattern-primer-status is-found">' . esc_html( $label ) . '</span>';
+	$html = '<span class="blankless-status is-found">' . esc_html( $label ) . '</span>';
 
 	$edit_url = pattern_edit_url( $pattern['id'] );
 	if ( '' !== $edit_url ) {
 		$html .= sprintf(
-			' <a class="pattern-primer-edit" href="%1$s">%2$s<span class="screen-reader-text"> %3$s</span></a>',
+			' <a class="blankless-edit" href="%1$s">%2$s<span class="screen-reader-text"> %3$s</span></a>',
 			esc_url( $edit_url ),
-			esc_html__( 'Edit', 'pattern-primer' ),
+			esc_html__( 'Edit', 'blankless' ),
 			esc_html( get_the_title( $pattern['id'] ) )
 		);
 	}
@@ -441,7 +442,7 @@ function render_pattern_datalist(): void {
 		}
 	}
 
-	echo '<datalist id="pattern-primer-patterns">';
+	echo '<datalist id="blankless-patterns">';
 	foreach ( $options as $value => $label ) {
 		printf( '<option value="%1$s" label="%2$s"></option>', esc_attr( (string) $value ), esc_attr( $label ) );
 	}
@@ -457,8 +458,8 @@ function render_pattern_datalist(): void {
 function add_settings_link( array $links ): array {
 	$settings = sprintf(
 		'<a href="%1$s">%2$s</a>',
-		esc_url( admin_url( 'themes.php?page=pattern-primer' ) ),
-		esc_html__( 'Settings', 'pattern-primer' )
+		esc_url( admin_url( 'themes.php?page=blankless' ) ),
+		esc_html__( 'Settings', 'blankless' )
 	);
 	array_unshift( $links, $settings );
 	return $links;
