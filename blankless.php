@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Blankless – Default Block Patterns for Post Types
  * Plugin URI:        https://github.com/bmx269/blankless
- * Description:       Never start with a blank slate again. Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code.
+ * Description:       Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code.
  * Version:           1.0.0
  * Requires at least: 6.5
  * Requires PHP:      8.0
@@ -193,12 +193,14 @@ function render_settings_page(): void {
 	?>
 	<div class="wrap">
 		<div class="blankless-header">
-			<img src="<?php echo esc_url( plugins_url( 'assets/icon.svg', __FILE__ ) ); ?>" alt="">
-			<div>
-				<h1><?php echo esc_html__( 'Blankless', 'blankless' ); ?></h1>
-				<p class="blankless-tagline"><?php esc_html_e( 'Never start with a blank slate again.', 'blankless' ); ?></p>
-				<p><?php esc_html_e( 'Start every new post from the block pattern you picked for its post type.', 'blankless' ); ?></p>
+			<div class="blankless-brand">
+				<img src="<?php echo esc_url( plugins_url( 'assets/icon.svg', __FILE__ ) ); ?>" alt="">
+				<h1 class="blankless-lockup">
+					<span class="blankless-wordmark"><?php echo esc_html__( 'Blankless', 'blankless' ); ?></span>
+					<span class="blankless-descriptor"><span><?php esc_html_e( 'Default Block Patterns for Post Types', 'blankless' ); ?></span></span>
+				</h1>
 			</div>
+			<p><?php esc_html_e( 'Start every new post from the block pattern you picked for its post type.', 'blankless' ); ?></p>
 		</div>
 		<hr class="wp-header-end">
 		<?php

@@ -10,5 +10,7 @@ await ctx.route(/^(?!file:|https:\/\/cdn\.jsdelivr\.net\/)/, (r) => r.abort());
 const page = await ctx.newPage();
 await page.goto('file://' + path.resolve(html));
 await page.evaluate(() => document.fonts.ready);
+// Let page scripts that measure text (the banner's logo lockup) finish.
+await page.waitForFunction(() => document.body.dataset.ready !== undefined || !document.querySelector('script'));
 await page.screenshot({ path: out });
 await browser.close();

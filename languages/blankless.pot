@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-28T18:01:30+00:00\n"
+"POT-Creation-Date: 2026-09-28T18:14:54+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: blankless\n"
@@ -23,7 +23,7 @@ msgid "https://github.com/bmx269/blankless"
 msgstr ""
 
 #. Description of the plugin
-msgid "Never start with a blank slate again. Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code."
+msgid "Set a default block pattern for any post type's new-post editor. Patterns saved in the Site Editor take priority over patterns in code."
 msgstr ""
 
 #. Author of the plugin
@@ -36,7 +36,7 @@ msgstr ""
 
 #: blankless.php:49
 #: blankless.php:50
-#: blankless.php:198
+#: blankless.php:199
 msgid "Blankless"
 msgstr ""
 
@@ -96,63 +96,63 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: blankless.php:199
-msgid "Never start with a blank slate again."
+#: blankless.php:200
+msgid "Default Block Patterns for Post Types"
 msgstr ""
 
-#: blankless.php:200
+#: blankless.php:202
 msgid "Start every new post from the block pattern you picked for its post type."
 msgstr ""
 
-#: blankless.php:209
+#: blankless.php:211
 msgid "Choose a pattern for each post type. New posts of that type open with its blocks already in place. Leave a field empty to keep the normal empty editor."
 msgstr ""
 
 #. translators: 1: example Saved Pattern slug, 2: example registered pattern name.
-#: blankless.php:214
+#: blankless.php:216
 msgid "Use the slug of a pattern saved in the Site Editor (%1$s) or the name of a pattern registered in code by your theme or a plugin (%2$s). Start typing to see suggestions. If both match, the pattern saved in the Site Editor takes priority over the one in code."
 msgstr ""
 
-#: blankless.php:228
+#: blankless.php:230
 msgid "Post type"
 msgstr ""
 
-#: blankless.php:229
+#: blankless.php:231
 msgid "Pattern"
 msgstr ""
 
-#: blankless.php:230
+#: blankless.php:232
 msgid "Status"
 msgstr ""
 
-#: blankless.php:257
+#: blankless.php:259
 msgid "No default"
 msgstr ""
 
-#: blankless.php:400
+#: blankless.php:402
 msgid "Not set"
 msgstr ""
 
-#: blankless.php:406
+#: blankless.php:408
 msgid "Not found"
 msgstr ""
 
-#: blankless.php:410
+#: blankless.php:412
 msgid "In Code"
 msgstr ""
 
-#: blankless.php:414
+#: blankless.php:416
 msgid "Saved in Site Editor"
 msgstr ""
 
-#: blankless.php:415
+#: blankless.php:417
 msgid "Saved in Patterns"
 msgstr ""
 
-#: blankless.php:424
+#: blankless.php:426
 msgid "Edit"
 msgstr ""
 
-#: blankless.php:501
+#: blankless.php:503
 msgid "Settings"
 msgstr ""

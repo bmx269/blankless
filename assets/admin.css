@@ -1,45 +1,62 @@
 /* Blankless settings screen (Appearance -> Blankless). */
 
 .blankless-header {
-	display: flex;
-	align-items: center;
-	gap: 16px;
 	box-sizing: border-box;
 	max-width: 960px;
-	margin: 16px 0 8px;
-	padding: 20px 24px;
-	border-radius: 8px;
-	background: #1f6f5c;
-	color: #fff;
+	margin: 20px 0 12px;
+	color: #1e1e1e;
+}
+
+/* Logo lockup: icon beside the wordmark, descriptor tracked to the wordmark's width. */
+.blankless-brand {
+	display: flex;
+	align-items: center;
+	gap: 6px;
 }
 
 .blankless-header img {
 	flex: none;
 	width: 56px;
 	height: 56px;
-	border-radius: 12px;
-	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+	border-radius: 6px;
 }
 
-.wrap .blankless-header h1 {
+.wrap .blankless-header .blankless-lockup {
+	display: inline-grid;
 	margin: 0;
 	padding: 0;
-	color: #fff;
-	font-size: 23px;
-	font-weight: 600;
-	line-height: 1.3;
+	color: #1e1e1e;
+}
+
+.blankless-wordmark {
+	font-size: 52px;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	line-height: 0.82;
+}
+
+/* The descriptor is sized from the wordmark's width, whatever the admin font, then justified across it. */
+.blankless-descriptor {
+	container-type: inline-size;
+	margin-top: 6px;
+}
+
+.blankless-descriptor > span {
+	display: block;
+	color: #50575e;
+	font-size: 3.75cqi;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	line-height: 1;
+	text-align: justify;
+	text-align-last: justify;
+	text-transform: uppercase;
 }
 
 .blankless-header p {
-	margin: 2px 0 0;
-	color: #d6e8e2;
+	margin: 14px 0 0;
+	color: #50575e;
 	font-size: 14px;
-}
-
-.blankless-header .blankless-tagline {
-	color: #fff;
-	font-size: 15px;
-	font-weight: 600;
 }
 
 .blankless-intro {

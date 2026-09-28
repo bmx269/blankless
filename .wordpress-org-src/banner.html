@@ -9,6 +9,9 @@ html, body { width: 772px; height: 250px; overflow: hidden; background: var(--gr
 .halo { position: absolute; left: 385px; top: -230px; width: 790px; height: 790px; border-radius: 50%; background: var(--dark); opacity: .75; }
 .copy { position: absolute; left: 48px; top: 0; height: 250px; display: flex; flex-direction: column; justify-content: center; }
 h1 { color: #fff; font-weight: 800; font-size: 52px; letter-spacing: -1.6px; line-height: 1; }
+.logo { display: inline-flex; flex-direction: column; align-self: flex-start; }
+.logo h1 { line-height: .82; }
+.kicker { margin-top: 5px; color: #D6E8E2; font-size: 9.5px; font-weight: 700; line-height: 1; text-transform: uppercase; white-space: nowrap; }
 h2 { margin-top: 12px; color: #fff; font-size: 17px; line-height: 22px; font-weight: 700; letter-spacing: -.3px; }
 h2 em { font-style: normal; color: var(--gold); }
 p { margin-top: 8px; color: #D6E8E2; font-size: 12.5px; line-height: 17px; font-weight: 500; width: 240px; }
@@ -34,7 +37,10 @@ p { margin-top: 8px; color: #D6E8E2; font-size: 12.5px; line-height: 17px; font-
 <body><div class="stage">
 	<div class="halo"></div>
 	<div class="copy">
-		<h1>Blankless</h1>
+		<div class="logo">
+			<h1>Blankless</h1>
+			<div class="kicker">Default Block Patterns for Post Types</div>
+		</div>
 		<h2>Never start with a <em>blank</em> slate again.</h2>
 		<p>Start every new post from the block pattern you picked for its post type.</p>
 	</div>
@@ -55,4 +61,15 @@ p { margin-top: 8px; color: #D6E8E2; font-size: 12.5px; line-height: 17px; font-
 		<div class="btn"></div>
 	</div>
 	<div class="plus"></div>
-</div></body></html>
+</div>
+<script>
+document.fonts.ready.then(() => {
+	const title = document.querySelector('.logo h1'), kicker = document.querySelector('.kicker');
+	const textWidth = (el) => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect().width; };
+	const gaps = kicker.textContent.length - 1;
+	kicker.style.letterSpacing = ((textWidth(title) - textWidth(kicker)) / gaps) + 'px';
+	kicker.style.marginRight = '-' + kicker.style.letterSpacing;
+	document.body.dataset.ready = '1';
+});
+</script>
+</body></html>

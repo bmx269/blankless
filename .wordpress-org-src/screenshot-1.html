@@ -5,11 +5,16 @@
 :root { --green: #1F6F5C; --gold: #F2B544; --ochre: #C98A12; --line: #BFD6CF; --ink: #1E1E1E; --muted: #50575e; --bg: #f4f6f5; --chip: #e3f1eb; }
 * { box-sizing: border-box; margin: 0; }
 html, body { width: 1280px; height: 800px; overflow: hidden; background: var(--bg); font-family: Inter, sans-serif; color: var(--ink); }
-.wrap { padding: 52px 64px 0; }
-h1 { font-size: 41px; font-weight: 800; letter-spacing: -1.2px; line-height: 1.1; }
+.wrap { padding: 36px 64px 0; }
+.brand { display: flex; align-items: center; gap: 6.7px; }
+.brand img { width: 60px; height: 60px; border-radius: 7px; }
+.brand .lockup { display: inline-flex; flex-direction: column; }
+.brand b { color: var(--ink); font-size: 43.7px; font-weight: 800; letter-spacing: -1.38px; line-height: .82; }
+.brand span { margin-top: 5.75px; color: var(--muted); font-size: 8.05px; font-weight: 700; line-height: 1; text-transform: uppercase; white-space: nowrap; }
+h1 { margin-top: 24px; font-size: 28px; font-weight: 800; letter-spacing: -.6px; line-height: 1.1; }
 h1 em { font-style: normal; color: var(--green); }
-.lede { margin-top: 10px; font-size: 18.5px; color: var(--muted); }
-.steps { margin-top: 40px; display: grid; grid-template-columns: 341px 366px 341px; justify-content: space-between; align-items: stretch; position: relative; }
+.lede { margin-top: 6px; font-size: 17px; color: var(--muted); }
+.steps { margin-top: 26px; display: grid; grid-template-columns: 341px 366px 341px; justify-content: space-between; align-items: stretch; position: relative; }
 .card { background: #fff; border-radius: 15px; box-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 14px rgba(0,0,0,.04); padding: 26px 26px 0; height: 392px; position: relative; }
 .num { width: 36px; height: 36px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; font-size: 17px; display: grid; place-items: center; }
 h2 { margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: -.3px; }
@@ -38,7 +43,7 @@ h2 { margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: -.3px;
 .mini .in.ph { font-family: Inter, sans-serif; color: #8c8f94; }
 .chip { flex: none; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 10px; background: var(--chip); color: var(--green); white-space: nowrap; }
 .chip.off { background: #f0f0f1; color: var(--muted); }
-.match { margin-top: 30px; background: #fff; border-radius: 15px; box-shadow: 0 1px 3px rgba(0,0,0,.06); padding: 20px 26px; display: flex; align-items: center; gap: 13px; height: 102px; }
+.match { margin-top: 22px; background: #fff; border-radius: 15px; box-shadow: 0 1px 3px rgba(0,0,0,.06); padding: 20px 26px; display: flex; align-items: center; gap: 13px; height: 102px; }
 .match .intro { width: 190px; flex: none; }
 .match .intro h3 { font-size: 17.5px; font-weight: 800; line-height: 21px; }
 .match .intro span { display: block; margin-top: 5px; font-size: 14px; color: var(--muted); }
@@ -48,11 +53,12 @@ h2 { margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: -.3px;
 .m code { font-weight: 400; font-family: Menlo, monospace; font-size: 12.5px; color: var(--green); }
 .m small { font-size: 14px; color: #2c3338; }
 .chev { color: #8c8f94; font-size: 16px; flex: none; }
-.foot { margin-top: 26px; font-size: 14.5px; color: var(--muted); line-height: 19px; padding-left: 4px; }
+.foot { margin-top: 20px; font-size: 14.5px; color: var(--muted); line-height: 19px; padding-left: 4px; }
 .foot b { color: var(--ink); }
 </style></head>
 <body><div class="wrap">
-	<h1>How <em>Blankless</em> works</h1>
+	<div class="brand" aria-hidden="true"><img src="../assets/icon.svg" alt=""><div class="lockup"><b>Blankless</b><span>Default Block Patterns for Post Types</span></div></div>
+	<h1>How it works</h1>
 	<p class="lede">Set it up once. Every new post of that type starts from the right blocks.</p>
 
 	<div class="steps">
@@ -102,4 +108,15 @@ h2 { margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: -.3px;
 	</div>
 
 	<p class="foot"><b>Never overwrites anything.</b> Only new posts that start out empty are filled, drafts of Saved Patterns are skipped, and a post type left blank keeps the normal empty editor.</p>
-</div></body></html>
+</div>
+<script>
+// Track the descriptor out to the wordmark's width, as in the banner's logo lockup.
+document.fonts.ready.then(() => {
+	const textWidth = (el) => { const r = document.createRange(); r.selectNodeContents(el); return r.getBoundingClientRect().width; };
+	const title = document.querySelector('.brand b'), kicker = document.querySelector('.brand span');
+	kicker.style.letterSpacing = ((textWidth(title) - textWidth(kicker)) / (kicker.textContent.length - 1)) + 'px';
+	kicker.style.marginRight = '-' + kicker.style.letterSpacing;
+	document.body.dataset.ready = '1';
+});
+</script>
+</body></html>
