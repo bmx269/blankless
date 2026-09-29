@@ -6,6 +6,7 @@ Never start with a blank slate again. Every new post, page or custom post type o
 
 **[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/blankless/main/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
 
+- **WordPress.org:** [wordpress.org/plugins/blankless](https://wordpress.org/plugins/blankless/)
 - **Requires:** WordPress 6.5+, PHP 8.0+
 - **License:** GPLv2 or later
 - **Author:** [Trent Stromkins](https://github.com/bmx269)
@@ -29,7 +30,7 @@ Leave a post type blank to keep the normal empty editor. Only new posts that sta
 
 ## Installation
 
-1. Copy the `blankless` folder into `wp-content/plugins/`, or upload the zip via **Plugins → Add New → Upload Plugin**.
+1. In **Plugins → Add New Plugin**, search for "Blankless" and install it. You can also download it from [WordPress.org](https://wordpress.org/plugins/blankless/), copy the `blankless` folder into `wp-content/plugins/`, or upload the zip via **Plugins → Add New Plugin → Upload Plugin**.
 2. Activate the plugin from the **Plugins** screen.
 3. Follow **Getting started** above.
 

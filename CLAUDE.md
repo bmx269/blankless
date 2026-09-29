@@ -3,6 +3,8 @@
 ## Project Overview
 WordPress plugin that pre-populates the block editor with a configurable block pattern per post type. Pure PHP (no JS build step). Database-stored patterns take priority over file-registered patterns.
 
+Approved on WordPress.org (September 2026): https://wordpress.org/plugins/blankless/
+
 ## Repository Structure
 ```
 ├── blankless.php   # Main plugin file (settings UI + default_content filter)
