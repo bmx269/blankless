@@ -12,11 +12,11 @@ Approved on WordPress.org (September 2026): https://wordpress.org/plugins/blankl
 ├── readme.txt                # WordPress.org plugin readme
 ├── README.md                 # GitHub-facing documentation
 ├── languages/                # Translation files (POT); regenerate with `wp i18n make-pot . languages/blankless.pot --slug=blankless --exclude=.github,.claude,.wordpress-org-src`
-├── blueprint.json            # WordPress Playground blueprint (installs from WordPress.org)
 ├── build.sh                  # Builds build/blankless/ + .zip from .distignore; checks Version == Stable tag
 ├── deploy.sh                 # Manual SVN deploy fallback (`./deploy.sh <svn-checkout>`), uses build.sh
 ├── .distignore               # Excluded from the WP.org package; must list /.git (10up deploy action)
-├── .wordpress-org/           # WP.org assets (banners, icons, screenshots)
+├── .wordpress-org/           # WP.org assets (banners, icons, screenshots); synced to SVN assets/
+│   └── blueprints/blueprint.json  # Playground blueprint (installs from WordPress.org); WP.org Live Preview reads it from SVN assets/blueprints/
 ├── .wordpress-org-src/       # HTML sources + render script for the drawn banners and screenshot 1
 └── .github/workflows/
     ├── plugin-check.yml      # CI: build, then Plugin Check the package, on push/PR to main

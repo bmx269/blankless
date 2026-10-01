@@ -20,7 +20,6 @@ CLAUDE.md
 README.md
 build.sh
 deploy.sh
-blueprint.json
 
 # Build artifacts and OS files
 *.zip

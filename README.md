@@ -4,7 +4,7 @@ Never start with a blank slate again. Every new post, page or custom post type o
 
 ![How Blankless works: build a pattern, pick it per post type, and Add New starts from it](.wordpress-org/screenshot-1.png)
 
-**[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/blankless/main/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
+**[Try it in WordPress Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/bmx269/blankless/main/.wordpress-org/blueprints/blueprint.json)** to test the plugin in your browser, with nothing to install. The demo sets a sample pattern as the default for Posts, so *Posts → Add New* opens with it.
 
 - **WordPress.org:** [wordpress.org/plugins/blankless](https://wordpress.org/plugins/blankless/)
 - **Requires:** WordPress 6.5+, PHP 8.0+

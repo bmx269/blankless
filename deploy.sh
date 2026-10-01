@@ -63,7 +63,8 @@ ASSETS_DIR="$SVN_DIR/assets"
 mkdir -p "$ASSETS_DIR"
 
 if [ -d "$PLUGIN_DIR/.wordpress-org" ]; then
-    cp "$PLUGIN_DIR/.wordpress-org/"* "$ASSETS_DIR/" 2>/dev/null || true
+    # Recursive, so assets/blueprints/ (the directory's Live Preview) is included.
+    rsync -rc --exclude='.*' "$PLUGIN_DIR/.wordpress-org/" "$ASSETS_DIR/"
 fi
 
 # --- Create tag ---
